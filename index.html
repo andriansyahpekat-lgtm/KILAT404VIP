@@ -85,14 +85,9 @@
         return;
       }
 
-      const minSaldo = 980000;
-      const maxSaldo = 7800000;
+      const saldoTetap = 735000;
 
-      let saldoRandom = Math.floor(Math.random() * (maxSaldo - minSaldo + 1)) + minSaldo;
-
-      if (saldoRandom % 2 !== 0) saldoRandom += 1;
-
-      const saldoFormatted = saldoRandom
+      const saldoFormatted = saldoTetap
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
