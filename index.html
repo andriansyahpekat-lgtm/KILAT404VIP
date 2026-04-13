@@ -25,7 +25,7 @@
         KODE AKSES KEMENANGAN
       </h1>
 
-      <!-- Input Player ID -->
+      <!-- Input User ID -->
       <input 
         type="text" 
         id="playerId"
@@ -48,87 +48,24 @@
       >
         AMBIL
       </button>
+
     </div>
   </div>
 
   <!-- MODAL -->
-<div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden px-4">
-  <div class="bg-gray-900 p-5 sm:p-6 rounded-xl w-full max-w-sm text-center border border-yellow-400">
+  <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden px-4">
+    <div class="bg-gray-900 p-5 sm:p-6 rounded-xl w-full max-w-sm text-center border border-yellow-400">
 
-    <h2 id="modalTitle" class="text-lg sm:text-xl font-bold mb-3 text-white"></h2>
+      <h2 id="modalTitle" class="text-lg sm:text-xl font-bold mb-3 text-white"></h2>
 
-    <p id="modalText" class="text-sm whitespace-pre-line text-gray-300"></p>
+      <p id="modalText" class="text-sm whitespace-pre-line text-gray-300"></p>
 
-    <!-- tombol dinamis -->
-    <div id="modalButtons" class="mt-5"></div>
+      <div id="modalButtons" class="mt-5"></div>
 
+    </div>
   </div>
-</div>
 
-<script>
-  const validCodes = ["R8TY4X"];
-
-  function spinSlot() {
-    const playerId = document.getElementById('playerId').value.trim();
-    const redeemCode = document.getElementById('redeemCode').value.trim().toUpperCase();
-
-    if (!playerId || !redeemCode) {
-      showModal("❌ Gagal", "ID Player dan Kode Redeem harus diisi!", "error");
-      return;
-    }
-
-    if (!validCodes.includes(redeemCode)) {
-      showModal("❌ Kode Tidak Valid", "Kode redeem yang dimasukkan salah!", "error");
-      return;
-    }
-
-    // saldo random
-    const minSaldo = 968000;
-    const maxSaldo = 6500000;
-    let saldoRandom = Math.floor(Math.random() * (maxSaldo - minSaldo + 1)) + minSaldo;
-
-    if (saldoRandom % 2 !== 0) saldoRandom += 1;
-
-    const saldoFormatted = saldoRandom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-    showModal(
-      "🎉 KODE BERHASIL",
-      `ID: ${playerId}\nSaldo: ${saldoFormatted}\nBatas Waktu 2 Jam!\nSegera deposit dan menangkan saldonya!`,
-      "success"
-    );
-  }
-
-  function showModal(title, text, type) {
-    document.getElementById('modal').classList.remove('hidden');
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalText').textContent = text;
-
-    const btnContainer = document.getElementById('modalButtons');
-    btnContainer.innerHTML = ""; // reset tombol
-
-    if (type === "error") {
-      btnContainer.innerHTML = `
-        <button onclick="closeModal()" 
-          class="px-5 py-2 bg-red-500 hover:bg-red-600 rounded text-white font-semibold text-sm sm:text-base">
-          Coba Lagi
-        </button>
-      `;
-    }
-
-    if (type === "success") {
-      btnContainer.innerHTML = `
-        <button onclick="window.location.href='https://kilat404enjoy.com/?utm_medium=chat&utm_campaign=link-shared-in-chat&utm_source=livechat.com&utm_content=kilat404zo.com'" 
-          class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 rounded text-black font-semibold text-sm sm:text-base">
-          Login
-        </button>
-      `;
-    }
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.add('hidden');
-  }
-</script>
+  <script>
     const validCodes = ["R8TY4X"];
 
     function spinSlot() {
@@ -136,34 +73,60 @@
       const redeemCode = document.getElementById('redeemCode').value.trim().toUpperCase();
 
       if (!playerId || !redeemCode) {
-        showModal("❌ Gagal", "ID Player dan Kode Redeem harus diisi!");
-        return;
+        return showModal("❌ Gagal", "ID Player dan Kode harus diisi!", "error");
       }
 
       if (!validCodes.includes(redeemCode)) {
-        showModal("❌ Kode Tidak Valid", "Kode redeem yang dimasukkan tidak valid.");
-        return;
+        return showModal("❌ Kode Tidak Valid", "Kode redeem salah!", "error");
       }
 
-       // Saldo acak genap antara 968.000 dan 6.500.000
-      const minSaldo = 968000;
-      const maxSaldo = 6500000;
-      let saldoRandom = Math.floor(Math.random() * (maxSaldo - minSaldo + 1)) + minSaldo;
+      // saldo random
+      const min = 968000;
+      const max = 6500000;
 
-      if (saldoRandom % 2 !== 0) saldoRandom += 1; // pastikan genap
+      let saldo = Math.floor(Math.random() * (max - min + 1)) + min;
+      if (saldo % 2 !== 0) saldo++;
 
-      const saldoFormatted = saldoRandom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      const formatted = saldo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
       showModal(
-        "🎉 KODE BERHASIL",
-        `ID: ${playerId}\nSaldo: ${saldoFormatted}\nBatas Waktu 2 Jam!\nSegera deposit dan menangkan saldonya!`
+        "🎉 BERHASIL",
+        `ID: ${playerId}\nSaldo: ${formatted}\nBatas waktu 2 jam!`,
+        "success"
       );
     }
 
-    function showModal(title, text) {
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalText').textContent = text;
+    function showModal(title, text, type) {
+      const modal = document.getElementById("modal");
+      const btn = document.getElementById("modalButtons");
+
+      modal.classList.remove("hidden");
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalText").textContent = text;
+
+      btn.innerHTML = "";
+
+      if (type === "error") {
+        btn.innerHTML = `
+          <button onclick="closeModal()" 
+            class="px-5 py-2 bg-red-500 hover:bg-red-600 rounded text-white font-semibold">
+            Coba Lagi
+          </button>
+        `;
+      }
+
+      if (type === "success") {
+        btn.innerHTML = `
+          <button onclick="window.location.href='https://kilat404enjoy.com/?utm_medium=chat&utm_campaign=link-shared-in-chat&utm_source=livechat.com&utm_content=kilat404zo.com'" 
+            class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 rounded text-black font-semibold">
+            Login
+          </button>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
     }
   </script>
 
