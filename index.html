@@ -85,11 +85,14 @@
         return;
       }
 
-      const saldoTetap = 735000;
+       // Saldo acak genap antara 968.000 dan 6.500.000
+      const minSaldo = 968000;
+      const maxSaldo = 6500000;
+      let saldoRandom = Math.floor(Math.random() * (maxSaldo - minSaldo + 1)) + minSaldo;
 
-      const saldoFormatted = saldoTetap
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      if (saldoRandom % 2 !== 0) saldoRandom += 1; // pastikan genap
+
+      const saldoFormatted = saldoRandom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
       showModal(
         "🎉 KODE BERHASIL",
